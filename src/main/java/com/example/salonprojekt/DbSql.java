@@ -132,7 +132,8 @@ public class DbSql {
         Tidsbestilling t = new Tidsbestilling();
         Behandling b = new Behandling();
         String sql = "SELECT * from (Select * from tidsbestilling inner join kunde on tidsbestilling.kundetidid = kunde.kundeid where kundetidid=" + String.valueOf(kundetidid)+")sub";
-        sql+= " inner join medarbejder on tidsbestilling.medarbejderid = medarbejder.medarbejderid";
+        sql+= " inner join medarbejder on tidsbestilling.medarbejderid = medarbejder.medarbejderid INNER JOIN behandling ON " +
+                "tidsbestilling.behandlingid = behandling.behandlingid)";
         try {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
