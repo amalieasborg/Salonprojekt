@@ -26,8 +26,8 @@ public class Usecase {
         k=db.soegStamoplysningerKunde(kundeid);
         return k;
     }
-    public boolean login(String brugernavn) throws SQLException {
-       boolean test =  db.login(brugernavn);
+    public boolean login(String brugernavn, String kodeord) throws SQLException {
+       boolean test =  db.login(brugernavn, kodeord);
         return test;
     }
 

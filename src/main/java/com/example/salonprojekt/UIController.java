@@ -37,6 +37,8 @@ public class UIController {
     @FXML
     private Button btnLogInd;
     @FXML
+    private Label lblLoginFejl;
+    @FXML
     private TextField txtOpretBrugernavn;
     @FXML
     private TextField txtOpretFornavn;
@@ -103,14 +105,16 @@ public class UIController {
         uc.opretKunde(k);
     }
     public void login(ActionEvent event) throws SQLException, IOException {
-        if (uc.login(txtIndtastBrugernavn.getText()))
+        if (uc.login(txtIndtastBrugernavn.getText(),pswIndtastKodeordSkjult.getText()))
         {
             root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }else System.out.println("hej");
+
+        }else lblLoginFejl.setText("Ugyldigt login");
+
 
     }
 

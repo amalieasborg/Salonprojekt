@@ -50,6 +50,10 @@ public class Main {
             case 9:
                 db.fjernTidsbestilling(1,1);
                 break;
+            case 10:
+                Tidsbestilling t=db.eksempel();
+                System.out.println(t);
+                break;
         }
 
     }

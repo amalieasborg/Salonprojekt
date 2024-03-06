@@ -28,5 +28,6 @@
       <Label layoutX="342.0" layoutY="191.0" text="Indtast Kodeord" />
       <Button fx:id="btnLogInd" layoutX="417.0" layoutY="283.0" mnemonicParsing="false" onAction="#login" text="Log ind" />
       <Button fx:id="btnOpretBruger" layoutX="310.0" layoutY="283.0" mnemonicParsing="false" onAction="#switchToOpretKunde" text="Opret bruger" />
+      <Label fx:id="lblLoginFejl" layoutX="310.0" layoutY="256.0" />
    </children>
 </AnchorPane>

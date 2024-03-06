@@ -152,6 +152,41 @@ public class DbSql {
             throw new RuntimeException(e);
         }
     }
+    public Tidsbestilling eksempel(){
+        String sql="SELECT *" +
+                " FROM ((tidsbestilling INNER JOIN kunde ON " +
+                "tidsbestilling.kundetidid=kunde.kundeid)" +
+                " INNER JOIN medarbejder ON " +
+                "tidsbestilling.medarbejderid =medarbejder.medarbejderid)" +
+                "INNER JOIN behandling ON " +
+                "tidsbestilling.behandlingid = behandling.behandlingid)";
+        Kunde k = new Kunde();
+        Medarbejder m = new Medarbejder();
+        Tidsbestilling t = new Tidsbestilling();
+        Behandling b = new Behandling();
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+             /*   m.setFnavn(rs.getString("fnavn"));
+                m.setEnavn(rs.getString("enavn"));
+                k.setFnavn(rs.getString("fnavn"));
+                k.setEnavn(rs.getString("enavn"));
+                b.setType(rs.getString("type"));
+                b.setPris(rs.getInt("pris"));
+                b.setVarighed(rs.getInt("varighed"));
+
+              */
+                t.setTidspunkt(rs.getString("tidspunkt"));
+                t.setKommentarer(rs.getString("kommentarer"));
+            }return t;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public void retTidsbestilling(int medarbejderid, int kundetidid){
         Tidsbestilling t=new Tidsbestilling();
         soegTidsbestilling(kundetidid);
@@ -159,8 +194,8 @@ public class DbSql {
 
     }
 
-    public boolean login(String brugernavn) throws SQLException {
-        String sql="select kodeord from kunde where brugernavn ="+brugernavn;
+    /*public boolean login(String brugernavn) throws SQLException {
+        String sql = "SELECT kodeord FROM kunde WHERE brugernavn = '" + brugernavn + "'";
         System.out.println(sql);
         ResultSet rs = stmt.executeQuery(sql);
             if (Objects.equals(rs.getString("kodeord"), brugernavn)){
@@ -168,4 +203,23 @@ public class DbSql {
             }
         return false;
     }
+
+     */
+
+    public boolean login(String brugernavn, String kodeord) {
+        String sql = "SELECT kodeord FROM kunde WHERE brugernavn = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, brugernavn);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) { // Kontrollerer, om der er et resultat
+                String retrievedPassword = rs.getString("kodeord");
+                return kodeord.equals(retrievedPassword);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 }
