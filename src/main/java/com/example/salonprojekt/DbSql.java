@@ -1,6 +1,7 @@
 package com.example.salonprojekt;
 
 import java.sql.*;
+import java.util.Objects;
 
 public class DbSql {
     private Connection connection;
@@ -57,8 +58,9 @@ public class DbSql {
             throw new RuntimeException(e);
         }
     }
-    public void opretKunde(String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email){
-        Kunde k=new Kunde(brugernavn,kodeord,fnavn,enavn,mobil,email);
+    //String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email
+    //brugernavn,kodeord,fnavn,enavn,mobil,email
+    public void opretKunde(Kunde k){
         try {
             String sql = "insert into Kunde (kundeid,brugernavn,kodeord,fnavn,enavn,mobil,email)";
             sql+="values ("+String.valueOf(k.getKundeid())+",'"+k.getBrugernavn()+"','"+k.getKodeord()+"','"+k.getFnavn()+"','"+k.getEnavn()+"','"+k.getMobil()+"','"+k.getEmail()+"')";
@@ -153,8 +155,17 @@ public class DbSql {
     public void retTidsbestilling(int medarbejderid, int kundetidid){
         Tidsbestilling t=new Tidsbestilling();
         soegTidsbestilling(kundetidid);
-
+        String sql="ALTER TABLE tidsbestilling";
 
     }
 
+    public boolean login(String brugernavn) throws SQLException {
+        String sql="select kodeord from kunde where brugernavn ="+brugernavn;
+        System.out.println(sql);
+        ResultSet rs = stmt.executeQuery(sql);
+            if (Objects.equals(rs.getString("kodeord"), brugernavn)){
+                return true;
+            }
+        return false;
+    }
 }

@@ -36,7 +36,7 @@ public class Main {
                 System.out.println(k);
                 break;
             case 5:
-                uc.opretKunde("kunde2","Kunde2","Kunde2","Kundesen2","kunde2mobil","kunde2@email.com");
+                //uc.opretKunde("kunde2","Kunde2","Kunde2","Kundesen2","kunde2mobil","kunde2@email.com");
                 break;
             case 6:
                 uc.fjernKunde(4);
