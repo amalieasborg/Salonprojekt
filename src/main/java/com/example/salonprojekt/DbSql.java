@@ -1,6 +1,7 @@
 package com.example.salonprojekt;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class DbSql {
@@ -118,7 +119,6 @@ public class DbSql {
         try{
             String sql="INSERT INTO tidsbestilling(tidsbestillingid,medarbejderid,kundetidid,tidspunkt,behandlingid,kommentarer)";
             sql+=" values ("+String.valueOf(t.getTidsbestillingsid()+","+t.getMedarbejderid()+","+t.getKundeid()+",'"+t.getTidspunkt()+"',"+ t.getBehandlingsid()+",'"+t.getKommentarer()+"')");
-
             stmt = connection.createStatement();
             stmt.execute(sql);
             stmt.close();
@@ -126,7 +126,7 @@ public class DbSql {
             throwables.printStackTrace();
         }
     }
-    public Tidsbestilling soegTidsbestilling(Integer kundetidid) {
+    /*public Tidsbestilling soegTidsbestilling(Integer kundetidid) {
         Kunde k = new Kunde();
         Medarbejder m = new Medarbejder();
         Tidsbestilling t = new Tidsbestilling();
@@ -152,7 +152,49 @@ public class DbSql {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }*/
+    public ArrayList soegTidsbestilling(Integer kundetidid) {
+        // Initialiser objekter
+        ArrayList liste = new ArrayList<>();
+        Kunde k = new Kunde();
+        Medarbejder m = new Medarbejder();
+        Tidsbestilling t = new Tidsbestilling();
+        Behandling b = new Behandling();
+
+        // Opdateret SQL-forespørgsel med korrekte JOINs og aliaser
+        String sql = "SELECT k.fnavn AS kundeFnavn, k.enavn AS kundeEnavn, m.fnavn AS medarbejderFnavn, " +
+                "m.enavn AS medarbejderEnavn, b.type, b.pris, b.varighed, t.tidspunkt, t.kommentarer " +
+                "FROM tidsbestilling t " +
+                "INNER JOIN kunde k ON t.kundetidid = k.kundeid " +
+                "INNER JOIN medarbejder m ON t.medarbejderid = m.medarbejderid " +
+                "INNER JOIN behandling b ON t.behandlingid = b.behandlingid " +
+                "WHERE t.kundetidid = " + kundetidid;
+
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) { // Antager at der kun findes én tidsbestilling pr. kundetidid
+                k.setFnavn(rs.getString("kundeFnavn"));
+                k.setEnavn(rs.getString("kundeEnavn"));
+                m.setFnavn(rs.getString("medarbejderFnavn"));
+                m.setEnavn(rs.getString("medarbejderEnavn"));
+                b.setType(rs.getString("type"));
+                b.setPris(rs.getInt("pris"));
+                b.setVarighed(rs.getInt("varighed"));
+                t.setTidspunkt(rs.getString("tidspunkt"));
+                t.setKommentarer(rs.getString("kommentarer"));
+                liste.add(k);
+                liste.add(m);
+                liste.add(b);
+                liste.add(t);
+            }
+            return liste;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     public Tidsbestilling eksempel(){
         String sql="SELECT *" +
                 " FROM ((tidsbestilling INNER JOIN kunde ON " +

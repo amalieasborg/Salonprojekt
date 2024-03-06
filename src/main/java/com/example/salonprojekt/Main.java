@@ -1,5 +1,6 @@
 package com.example.salonprojekt;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -45,13 +46,13 @@ public class Main {
                 db.soegTidsbestilling(1);
                 break;
             case 8:
-                db.opretTidsbestilling(1,1,"2024-03-18 12:20:00",1,"Nej");
+                db.opretTidsbestilling(2,2,"2024-05-07 08:30:00",2,"PLease");
                 break;
             case 9:
                 db.fjernTidsbestilling(1,1);
                 break;
             case 10:
-                Tidsbestilling t=db.eksempel();
+                ArrayList t = db.soegTidsbestilling(7);
                 System.out.println(t);
                 break;
         }

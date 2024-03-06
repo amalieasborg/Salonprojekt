@@ -1,5 +1,7 @@
 package com.example.salonprojekt;
 
+import java.util.ArrayList;
+
 public class Tidsbestilling {
     private int tidsbestillingsid;
     private int medarbejderid;
@@ -7,6 +9,8 @@ public class Tidsbestilling {
     private String tidspunkt;
     private int behandlingsid;
     private String kommentarer;
+
+    private ArrayList<Object> tidsbestillinger = new ArrayList<>();
 
     public Tidsbestilling() {
     }
@@ -81,7 +85,7 @@ public class Tidsbestilling {
     @Override
     public String toString() {
         return "Tidsbestilling{" +
-                "tidsbestillinsid=" + tidsbestillingsid +
+                "tidsbestillingsid=" + tidsbestillingsid +
                 ", medarbejderid=" + medarbejderid +
                 ", kundeid=" + kundeid +
                 ", tidspunkt='" + tidspunkt + '\'' +

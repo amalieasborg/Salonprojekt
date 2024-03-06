@@ -30,5 +30,8 @@ public class Usecase {
        boolean test =  db.login(brugernavn, kodeord);
         return test;
     }
+    public void opretTidsbestilling(int medarbejderid, int kundetidid,String tidspunkt,int behandlingid,String kommentarer){
+        db.opretTidsbestilling(medarbejderid,kundetidid,tidspunkt,behandlingid,kommentarer);
+    }
 
 }
