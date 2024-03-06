@@ -6,9 +6,9 @@ public class Medarbejder extends Person{
     public Medarbejder() {
     }
 
-    public Medarbejder(int medarbejderid, String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email) {
+    public Medarbejder(String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email) {
         super(brugernavn, kodeord, fnavn, enavn, mobil, email);
-        this.medarbejderid = medarbejderid;
+
     }
 
     public int getMedarbejderid() {

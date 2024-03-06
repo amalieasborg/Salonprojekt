@@ -6,9 +6,9 @@ public class Kunde extends Person{
     public Kunde() {
     }
 
-    public Kunde(int kundeid, String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email) {
+    public Kunde(String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email) {
         super(brugernavn, kodeord, fnavn, enavn, mobil, email);
-        this.kundeid = kundeid;
+
     }
 
     public int getKundeid() {

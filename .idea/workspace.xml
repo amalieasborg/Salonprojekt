@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6c44c3f-7973-4ae2-8557-aab06bce062f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="b6c44c3f-7973-4ae2-8557-aab06bce062f" name="Changes" comment="Hej">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Behandling.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/DbSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/DbSql.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Kunde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Kunde.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Medarbejder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Medarbejder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Tidsbestilling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Tidsbestilling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Usecase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Usecase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/salonprojekt/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/salonprojekt/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +58,19 @@
       <option name="presentableId" value="Default" />
       <updated>1709022474574</updated>
     </task>
+    <task id="LOCAL-00001" summary="Hej">
+      <option name="closed" value="true" />
+      <created>1709627472835</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709627472835</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Hej" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hej" />
   </component>
 </project>

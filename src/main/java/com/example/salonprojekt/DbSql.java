@@ -16,7 +16,7 @@ public class DbSql {
         }
     }
     public void opretMedarbejder(String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email){
-        Medarbejder m=new Medarbejder();
+        Medarbejder m=new Medarbejder(brugernavn,kodeord,fnavn,enavn,mobil,email);
         try {
             String sql = "insert into Medarbejder (medarbejderid,brugernavn,kodeord,fnavn,enavn,mobil,email)";
             sql+="values ("+String.valueOf(m.getMedarbejderid())+",'"+m.getBrugernavn()+"','"+m.getKodeord()+"','"+m.getFnavn()+"','"+m.getEnavn()+"','"+m.getMobil()+"','"+m.getEmail()+"')";
@@ -30,7 +30,7 @@ public class DbSql {
     public void fjernMedarbejder(int medarbejderid){
         try {
             String sql = "DELETE FROM Medarbejder WHERE medarbejderid=" + String.valueOf(medarbejderid);
-            Statement stmt = connection.createStatement();
+            stmt = connection.createStatement();
             stmt.execute(sql);
             stmt.close();
         } catch (SQLException throwables) {
@@ -41,7 +41,7 @@ public class DbSql {
         String sql = "SELECT * from medarbejder where medarbejderid="+String.valueOf(medarbejderid);
         Medarbejder m=new Medarbejder();
         try{
-            Statement stmt=connection.createStatement();
+            stmt=connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()) {
                 m.setMedarbejderid(rs.getInt(1));
@@ -58,11 +58,11 @@ public class DbSql {
         }
     }
     public void opretKunde(String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email){
-        Kunde k=new Kunde();
+        Kunde k=new Kunde(brugernavn,kodeord,fnavn,enavn,mobil,email);
         try {
             String sql = "insert into Kunde (kundeid,brugernavn,kodeord,fnavn,enavn,mobil,email)";
             sql+="values ("+String.valueOf(k.getKundeid())+",'"+k.getBrugernavn()+"','"+k.getKodeord()+"','"+k.getFnavn()+"','"+k.getEnavn()+"','"+k.getMobil()+"','"+k.getEmail()+"')";
-            Statement stmt = connection.createStatement();
+            stmt = connection.createStatement();
             stmt.execute(sql);
             stmt.close();
         } catch (SQLException throwables) {
@@ -72,7 +72,7 @@ public class DbSql {
     public void fjernKunde(int kundeid){
         try {
             String sql = "DELETE FROM kunde WHERE kundeid=" + String.valueOf(kundeid);
-            Statement stmt = connection.createStatement();
+            stmt = connection.createStatement();
             stmt.execute(sql);
             stmt.close();
         } catch (SQLException throwables) {
@@ -84,7 +84,7 @@ public class DbSql {
         String sql = "SELECT * from kunde where kundeid="+String.valueOf(kundeid);
         Kunde k=new Kunde();
         try{
-            Statement stmt=connection.createStatement();
+            stmt=connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()) {
                 k.setKundeid(rs.getInt(1));
@@ -100,18 +100,61 @@ public class DbSql {
             throw new RuntimeException(e);
         }
     }
-
-
-    public void fjernTidsbestilling(int medarbejderid, int kundeid){
+    public void fjernTidsbestilling(int medarbejderid, int kundetidid){
         try {
-            String sql = "DELETE FROM tidsbestilling WHERE medarbejder="+String.valueOf(medarbejderid);
-            sql+= " and kundeid =" + String.valueOf(kundeid);
-            Statement stmt = connection.createStatement();
+            String sql = "DELETE FROM tidsbestilling WHERE medarbejderid="+String.valueOf(medarbejderid);
+            sql+= " and kundetidid =" + String.valueOf(kundetidid);
+            stmt = connection.createStatement();
             stmt.execute(sql);
             stmt.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+    public void opretTidsbestilling(int medarbejderid,int kundetidid,String tidspunkt,int behandlingid,String kommentarer){
+        Tidsbestilling t =new Tidsbestilling(medarbejderid,kundetidid,tidspunkt,behandlingid,kommentarer);
+        try{
+            String sql="INSERT INTO tidsbestilling(tidsbestillingid,medarbejderid,kundetidid,tidspunkt,behandlingid,kommentarer)";
+            sql+=" values ("+String.valueOf(t.getTidsbestillingsid()+","+t.getMedarbejderid()+","+t.getKundeid()+",'"+t.getTidspunkt()+"',"+ t.getBehandlingsid()+",'"+t.getKommentarer()+"')");
+
+            stmt = connection.createStatement();
+            stmt.execute(sql);
+            stmt.close();
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+    }
+    public Tidsbestilling soegTidsbestilling(Integer kundetidid) {
+        Kunde k = new Kunde();
+        Medarbejder m = new Medarbejder();
+        Tidsbestilling t = new Tidsbestilling();
+        Behandling b = new Behandling();
+        String sql = "SELECT * from (Select * from tidsbestilling inner join kunde on tidsbestilling.kundetidid = kunde.kundeid where kundetidid=" + String.valueOf(kundetidid)+")sub";
+        sql+= " inner join medarbejder on tidsbestilling.medarbejderid = medarbejder.medarbejderid";
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                m.setFnavn(rs.getString("fnavn"));
+                m.setEnavn(rs.getString("enavn"));
+                k.setFnavn(rs.getString("fnavn"));
+                k.setEnavn(rs.getString("enavn"));
+                b.setType(rs.getString("type"));
+                b.setPris(rs.getInt("pris"));
+                b.setVarighed(rs.getInt("varighed"));
+                t.setTidspunkt(rs.getString("tidspunkt"));
+                t.setKommentarer(rs.getString("kommentarer"));
+            }return t;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void retTidsbestilling(int medarbejderid, int kundetidid){
+        Tidsbestilling t=new Tidsbestilling();
+        soegTidsbestilling(kundetidid);
+
+
     }
 
 }
