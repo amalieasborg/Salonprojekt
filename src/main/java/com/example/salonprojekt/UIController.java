@@ -13,11 +13,7 @@ import java.sql.*;
 
 public class UIController {
     Usecase uc=new Usecase();
-
-    Statement stmt;
-    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Salonprojekt", "root", "");
     private Stage stage;
-
     private Scene scene;
     private Parent root;
     @FXML
@@ -48,7 +44,6 @@ public class UIController {
     private TextField txtOpretMobil;
     @FXML private TextField txtOpretEmail;
 
-    @FXML private DatePicker dato;
 
     public UIController() throws SQLException {
     }
@@ -64,8 +59,6 @@ public class UIController {
         pswIndtastKodeordSkjult.setVisible(true);
         txtIndtastKodeord.setVisible(false);
     }
-
-
     public void switchToMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -73,6 +66,7 @@ public class UIController {
         stage.setScene(scene);
         stage.show();
     }
+
     public void switchToOpretKunde(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("opretKunde.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -102,21 +96,12 @@ public class UIController {
         k.setEnavn(efternavn);
         k.setMobil(mobil);
         k.setEmail(email);
-        uc.opretKunde(k);
+        uc.opretKunde(brugernavn,kodeord,fornavn,efternavn,mobil,email);
     }
+
     public void login(ActionEvent event) throws SQLException, IOException {
-        if (uc.login(txtIndtastBrugernavn.getText(),pswIndtastKodeordSkjult.getText()))
-        {
-            root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
+        if (uc.login(txtIndtastBrugernavn.getText(),pswIndtastKodeordSkjult.getText())) {
+            switchToMenu(event);
         }else lblLoginFejl.setText("Ugyldigt login");
-
-
     }
-
-
 }

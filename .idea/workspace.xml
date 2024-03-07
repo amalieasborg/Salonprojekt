@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b6c44c3f-7973-4ae2-8557-aab06bce062f" name="Changes" comment="Hej">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Behandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Behandling.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/DbSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/DbSql.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Tidsbestilling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Tidsbestilling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/UIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/UIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Usecase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/salonprojekt/Usecase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +103,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709727005556</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Hej">
+      <option name="closed" value="true" />
+      <created>1709729979938</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1709729979938</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

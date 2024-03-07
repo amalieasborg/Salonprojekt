@@ -10,21 +10,10 @@ public class Tidsbestilling {
     private int behandlingsid;
     private String kommentarer;
 
-    private ArrayList<Object> tidsbestillinger = new ArrayList<>();
-
     public Tidsbestilling() {
     }
 
     public Tidsbestilling(int medarbejderid, int kundeid, String tidspunkt, int behandlingsid, String kommentarer) {
-        this.medarbejderid = medarbejderid;
-        this.kundeid = kundeid;
-        this.tidspunkt = tidspunkt;
-        this.behandlingsid = behandlingsid;
-        this.kommentarer = kommentarer;
-    }
-
-    public Tidsbestilling(int tidsbestillingsid, int medarbejderid, int kundeid, String tidspunkt, int behandlingsid, String kommentarer) {
-        this.tidsbestillingsid = tidsbestillingsid;
         this.medarbejderid = medarbejderid;
         this.kundeid = kundeid;
         this.tidspunkt = tidspunkt;

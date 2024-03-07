@@ -59,9 +59,8 @@ public class DbSql {
             throw new RuntimeException(e);
         }
     }
-    //String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email
-    //brugernavn,kodeord,fnavn,enavn,mobil,email
-    public void opretKunde(Kunde k){
+    public void opretKunde(String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email){
+        Kunde k=new Kunde(brugernavn,kodeord,fnavn,enavn,mobil,email);
         try {
             String sql = "insert into Kunde (kundeid,brugernavn,kodeord,fnavn,enavn,mobil,email)";
             sql+="values ("+String.valueOf(k.getKundeid())+",'"+k.getBrugernavn()+"','"+k.getKodeord()+"','"+k.getFnavn()+"','"+k.getEnavn()+"','"+k.getMobil()+"','"+k.getEmail()+"')";
@@ -82,7 +81,6 @@ public class DbSql {
             throwables.printStackTrace();
         }
     }
-
     public Kunde soegStamoplysningerKunde(int kundeid){
         String sql = "SELECT * from kunde where kundeid="+String.valueOf(kundeid);
         Kunde k=new Kunde();
@@ -126,33 +124,7 @@ public class DbSql {
             throwables.printStackTrace();
         }
     }
-    /*public Tidsbestilling soegTidsbestilling(Integer kundetidid) {
-        Kunde k = new Kunde();
-        Medarbejder m = new Medarbejder();
-        Tidsbestilling t = new Tidsbestilling();
-        Behandling b = new Behandling();
-        String sql = "SELECT * from (Select * from tidsbestilling inner join kunde on tidsbestilling.kundetidid = kunde.kundeid where kundetidid=" + String.valueOf(kundetidid)+")sub";
-        sql+= " inner join medarbejder on tidsbestilling.medarbejderid = medarbejder.medarbejderid INNER JOIN behandling ON " +
-                "tidsbestilling.behandlingid = behandling.behandlingid)";
-        try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                m.setFnavn(rs.getString("fnavn"));
-                m.setEnavn(rs.getString("enavn"));
-                k.setFnavn(rs.getString("fnavn"));
-                k.setEnavn(rs.getString("enavn"));
-                b.setType(rs.getString("type"));
-                b.setPris(rs.getInt("pris"));
-                b.setVarighed(rs.getInt("varighed"));
-                t.setTidspunkt(rs.getString("tidspunkt"));
-                t.setKommentarer(rs.getString("kommentarer"));
-            }return t;
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
     public ArrayList soegTidsbestilling(Integer kundetidid) {
         // Initialiser objekter
         ArrayList liste = new ArrayList<>();
@@ -169,7 +141,6 @@ public class DbSql {
                 "INNER JOIN medarbejder m ON t.medarbejderid = m.medarbejderid " +
                 "INNER JOIN behandling b ON t.behandlingid = b.behandlingid " +
                 "WHERE t.kundetidid = " + kundetidid;
-
         try {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -194,61 +165,6 @@ public class DbSql {
             throw new RuntimeException(e);
         }
     }
-
-    public Tidsbestilling eksempel(){
-        String sql="SELECT *" +
-                " FROM ((tidsbestilling INNER JOIN kunde ON " +
-                "tidsbestilling.kundetidid=kunde.kundeid)" +
-                " INNER JOIN medarbejder ON " +
-                "tidsbestilling.medarbejderid =medarbejder.medarbejderid)" +
-                "INNER JOIN behandling ON " +
-                "tidsbestilling.behandlingid = behandling.behandlingid)";
-        Kunde k = new Kunde();
-        Medarbejder m = new Medarbejder();
-        Tidsbestilling t = new Tidsbestilling();
-        Behandling b = new Behandling();
-        try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-             /*   m.setFnavn(rs.getString("fnavn"));
-                m.setEnavn(rs.getString("enavn"));
-                k.setFnavn(rs.getString("fnavn"));
-                k.setEnavn(rs.getString("enavn"));
-                b.setType(rs.getString("type"));
-                b.setPris(rs.getInt("pris"));
-                b.setVarighed(rs.getInt("varighed"));
-
-              */
-                t.setTidspunkt(rs.getString("tidspunkt"));
-                t.setKommentarer(rs.getString("kommentarer"));
-            }return t;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    public void retTidsbestilling(int medarbejderid, int kundetidid){
-        Tidsbestilling t=new Tidsbestilling();
-        soegTidsbestilling(kundetidid);
-        String sql="ALTER TABLE tidsbestilling";
-
-    }
-
-    /*public boolean login(String brugernavn) throws SQLException {
-        String sql = "SELECT kodeord FROM kunde WHERE brugernavn = '" + brugernavn + "'";
-        System.out.println(sql);
-        ResultSet rs = stmt.executeQuery(sql);
-            if (Objects.equals(rs.getString("kodeord"), brugernavn)){
-                return true;
-            }
-        return false;
-    }
-
-     */
-
     public boolean login(String brugernavn, String kodeord) {
         String sql = "SELECT kodeord FROM kunde WHERE brugernavn = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -263,6 +179,4 @@ public class DbSql {
         }
         return false;
     }
-
-
 }

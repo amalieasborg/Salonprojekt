@@ -48,4 +48,13 @@ public class Behandling {
         this.pris = pris;
     }
 
+    @Override
+    public String toString() {
+        return "Behandling{" +
+                "behandlingID=" + behandlingID +
+                ", type='" + type + '\'' +
+                ", varighed=" + varighed +
+                ", pris=" + pris +
+                '}';
+    }
 }

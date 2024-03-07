@@ -12,18 +12,16 @@ public class Main {
         System.out.println("1. Opret Medarbejder");
         System.out.println("2. Fjern Medarbejder");
         System.out.println("3. Søg info Medarbejder");
-        System.out.println("4. Søg info Kunde");
-        System.out.println("5. Opret Kunde");
-        System.out.println("6. Fjern Kunde");
-        System.out.println("7. Søg tidsbestilling");
-        System.out.println("8. Opret tidsbestilling");
-        System.out.println("9. Fjern tidsbestilling");
+        System.out.println("4. Opret Kunde");
+        System.out.println("5. Fjern Kunde");
+        System.out.println("6. Søg info Kunde");
+        System.out.println("7. Opret tidsbestilling");
+        System.out.println("8. Fjern tidsbestilling");
+        System.out.println("9. Søg tidsbestilling");
         int valg = input.nextInt();
         switch (valg) {
             case 1:
-                //uc.opretMedarbejder("Amalieasborg","2345","Amalie","Hansen","22712447","amalie@gmail.com");
-
-                db.opretMedarbejder("Amalieasborg","2345","Amalie","Hansen","22712447","amalie@gmail.com");
+                uc.opretMedarbejder("Amalieasborg","2345","Amalie","Hansen","22712447","amalie@gmail.com");
                 break;
             case 2:
                 uc.fjernMedarbejder(5);
@@ -33,28 +31,25 @@ public class Main {
                 System.out.println(m);
                 break;
             case 4:
+                uc.opretKunde("kunde3","Kunde3","Kunde3","Kundesen3","kunde3mobil","kunde3@email.com");
+                break;
+            case 5:
+                uc.fjernKunde(4);
+                break;
+            case 6:
                 Kunde k=uc.soegStamoplysningerKunde(1);
                 System.out.println(k);
                 break;
-            case 5:
-                //uc.opretKunde("kunde2","Kunde2","Kunde2","Kundesen2","kunde2mobil","kunde2@email.com");
-                break;
-            case 6:
-                uc.fjernKunde(4);
-                break;
             case 7:
-                db.soegTidsbestilling(1);
+                uc.opretTidsbestilling(2,6,"2024-05-07 08:30:00",2,"PLease");
                 break;
             case 8:
-                db.opretTidsbestilling(2,2,"2024-05-07 08:30:00",2,"PLease");
+                uc.fjernTidsbestilling(1,1);
                 break;
             case 9:
-                db.fjernTidsbestilling(1,1);
+                System.out.println(uc.soegTidsbestilling(6));
                 break;
-            case 10:
-                ArrayList t = db.soegTidsbestilling(7);
-                System.out.println(t);
-                break;
+
         }
 
     }
