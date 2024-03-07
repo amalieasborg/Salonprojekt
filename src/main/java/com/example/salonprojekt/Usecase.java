@@ -2,7 +2,6 @@ package com.example.salonprojekt;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.TooManyListenersException;
 
 public class Usecase {
     private DbSql db=new DbSql();
@@ -10,6 +9,7 @@ public class Usecase {
     private Kunde k;
     private Tidsbestilling t;
     private ArrayList <Tidsbestilling> tidliste;
+
     public void opretMedarbejder(String brugernavn, String kodeord, String fnavn, String enavn, String mobil, String email){
         db.opretMedarbejder(brugernavn,kodeord,fnavn,enavn,mobil,email);
     }
